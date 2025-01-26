@@ -23,13 +23,13 @@ This service displays a static web page with the message "Welcome to Service B."
 The Kubernetes cluster was created using Azure Kubernetes Service (AKS) with RBAC enabled and a single-node setup.
 
 #### **Commands Used**:
-
+```bash
 -az login
 -az group create --name k8sResourceGroup --location israelcentral
 -az provider register --namespace Microsoft.ContainerService
 -az provider show --namespace Microsoft.ContainerService --query "registrationState" -o table
 -az aks create --resource-group k8sResourceGroup --name myAKSCluster --node-count 1 --enable-managed-identity --generate-ssh-keys
-
+```
 ---
 
 ### 2. **Set up K8S Cluster with RBAC Enabled**
@@ -50,11 +50,12 @@ Service-B:
    - An NGINX-based service with a custom index.html file displaying "Welcome to Service B."
 
 #### **Commands Used**:
+```bash
 - kubectl apply -f k8s/deployments/a-deployment.yaml
 - kubectl apply -f k8s/services/a-service.yaml
 - kubectl apply -f k8s/deployments/b-deployment.yaml
 - kubectl apply -f k8s/services/b-service.yaml
-
+```
 ---
 ### 4. **Ingress Controller**
 An NGINX Ingress controller was configured to route traffic to both services:
@@ -63,20 +64,23 @@ An NGINX Ingress controller was configured to route traffic to both services:
     /service-b redirects to Service-B.
 
 #### **Commands Used**:
+```bash
 kubectl apply -f k8s/ingress.yaml
-
+```
 ---
 
 ### 5. **Network Policy**
 A network policy was applied to restrict communication between Service-A and Service-B.
 
 #### **Commands Used**:
+```bash
 kubectl apply -f k8s/deny-com-policy.yaml
-
+```
 #### **Testing**:
+```bash
 kubectl exec -it <service-a-pod> -- curl http://service-b <br>
-    # Expected result: Connection timeout
-
+# Expected result: Connection timeout
+```
 ---
 ### 6. **Service-A Application**
 - Fetches Bitcoin prices in USD every minute and prints them to the console.
@@ -85,9 +89,10 @@ kubectl exec -it <service-a-pod> -- curl http://service-b <br>
 
 --- 
 #### **Commands Used**:<br>
+```bash
 - docker build -t natashak8sregistry.azurecr.io/bitcoin-fetcher:latest ./app
 - docker push natashak8sregistry.azurecr.io/bitcoin-fetcher:latest
-
+```
 ---
 ###  **General Guidelines**
 
@@ -121,7 +126,7 @@ kubectl exec -it <service-a-pod> -- curl http://service-b <br>
     └───services
             a-service.yaml
             b-service.yaml
-
+```
 ---
 ### Service-A Snapshot
 
