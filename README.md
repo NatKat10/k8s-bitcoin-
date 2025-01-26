@@ -9,9 +9,11 @@ This project demonstrates the deployment of a Kubernetes (K8s) cluster using Azu
 ## Accessing the Services
 The services are deployed and accessible via the following URLs:
 Service-A: http://51.4.40.150/service-a
+
 This service fetches the current Bitcoin price and displays it along with price trends and a 10-minute average.
 
 Service-B: http://51.4.40.150/service-b
+
 This service displays a static web page with the message "Welcome to Service B."
 
 
