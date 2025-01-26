@@ -7,7 +7,7 @@ This project demonstrates the deployment of a Kubernetes (K8s) cluster using Azu
 ---
 
 ## Accessing the Services
-The services are deployed and accessible via the following URLs:
+The services are deployed and accessible via the following URLs:<br>
 Service-A: http://51.4.40.150/service-a
 
 This service fetches the current Bitcoin price and displays it along with price trends and a 10-minute average.
@@ -36,8 +36,9 @@ The Kubernetes cluster was created using Azure Kubernetes Service (AKS) with RBA
 RBAC was enabled during the cluster creation process, ensuring secure management of resources.
 
 Verification Command:<br>
+```bash
 az aks show --resource-group k8sResourceGroup --name myAKSCluster --query enableRbac --output table
-
+```
 ---
 
 ### 3. **Two Services: Service-A and Service-B**
@@ -78,7 +79,7 @@ kubectl apply -f k8s/deny-com-policy.yaml
 ```
 #### **Testing**:
 ```bash
-kubectl exec -it <service-a-pod> -- curl http://service-b <br>
+kubectl exec -it <service-a-pod> -- curl http://service-b 
 # Expected result: Connection timeout
 ```
 ---
@@ -87,6 +88,9 @@ kubectl exec -it <service-a-pod> -- curl http://service-b <br>
 - Calculates the average price for the last 10 minutes and logs it.
 - Updates a dynamic web page with the price and trends.
 
+### Service-A Snapshot
+
+![Service-A](images/serviceA.png)
 --- 
 #### **Commands Used**:<br>
 ```bash
@@ -96,10 +100,10 @@ kubectl exec -it <service-a-pod> -- curl http://service-b <br>
 ---
 ###  **General Guidelines**
 
-- Automated Deployment: All resources are defined in YAML files for repeatability.
-- Liveness and Readiness Probes:
-- Configured for both services to ensure health checks and auto-recovery.
-- Network Isolation:
+- Automated Deployment: All resources are defined in YAML files for repeatability.<br>
+Liveness and Readiness Probes:
+- Configured for both services to ensure health checks and auto-recovery.<br>
+Network Isolation:
 - Implemented via Kubernetes Network Policies to restrict unnecessary communication.
 
 ---
@@ -128,9 +132,6 @@ kubectl exec -it <service-a-pod> -- curl http://service-b <br>
             b-service.yaml
 ```
 ---
-### Service-A Snapshot
-
-![Service-A](images/serviceA.png)
 
 ### Service-B Snapshot
 
