@@ -1,6 +1,9 @@
 import time
 import requests
 import os
+
+import sys
+sys.stdout.reconfigure(line_buffering=True)
 # store the prices in a list and initialize last price and latest avarge to display in the html file 
 prices = []
 latest_avg_price = None 
@@ -43,15 +46,17 @@ def log_to_html(current_price, avg_price=None):
     # adding price movement arrow
     if last_price is not None:
         if current_price > last_price:
-            arrow = "🟢↑"  # green arrow if the current price is larger then the last price 
+            arrow = '<span style="color:green;">&#9650;</span>'  # Green up arrow ▲
         elif current_price < last_price:
-            arrow = "🔴↓"  #red arrow if the current price is smaller then the price before 
+            arrow = '<span style="color:red;">&#9660;</span>'  # Red down arrow ▼
         else:
-            arrow = "🟡→"  #yellow arrow if the price is the same 
+            arrow = '<span style="color:yellow;">&#9654;</span>'  # Yellow right arrow ▶
     else:
-        arrow = ""  # initial state 
+        arrow = ""  # Initial state 
 
-    output_path = os.path.join(os.path.dirname(__file__), "output.html")
+    # output_path = os.path.join(os.path.dirname(__file__), "output.html")
+    output_path = os.path.join(os.path.dirname(__file__), "index.html")
+
 
     last_price = current_price  #update the last price 
     with open(output_path, "w",encoding="utf-8") as f:
@@ -59,7 +64,8 @@ def log_to_html(current_price, avg_price=None):
         <html>
         <head>
             <title>Bitcoin Price Dashboard</title>
-            <meta http-equiv="refresh" content="30;url=output.html?{int(time.time())}">
+            <meta http-equiv="refresh" content="30;url=/service-a?{int(time.time())}">
+
             <style>
                 body {{
                     font-family: 'Aptos', sans-serif;

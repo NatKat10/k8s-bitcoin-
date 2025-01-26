@@ -16,6 +16,19 @@ spec:
     spec:
       containers:
         - name: service-a
-          image: nginx:1.21
+          image: natashak8sregistry.azurecr.io/bitcoin-fetcher:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
