@@ -100,10 +100,11 @@ kubectl exec -it <service-a-pod> -- curl http://service-b
 ---
 ###  **General Guidelines**
 
-- Automated Deployment: All resources are defined in YAML files for repeatability.<br>
-Liveness and Readiness Probes:
-- Configured for both services to ensure health checks and auto-recovery.<br>
-Network Isolation:
+- Automated Deployment:
+All resources are defined in YAML files for repeatability.<br>
+- Liveness and Readiness Probes:
+Configured for both services to ensure health checks and auto-recovery.<br>
+- Network Isolation:
 - Implemented via Kubernetes Network Policies to restrict unnecessary communication.
 
 ---
