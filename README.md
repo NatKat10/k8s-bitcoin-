@@ -24,18 +24,18 @@ The Kubernetes cluster was created using Azure Kubernetes Service (AKS) with RBA
 
 #### **Commands Used**:
 
-az login
-az group create --name k8sResourceGroup --location israelcentral
-az provider register --namespace Microsoft.ContainerService
-az provider show --namespace Microsoft.ContainerService --query "registrationState" -o table
-az aks create --resource-group k8sResourceGroup --name myAKSCluster --node-count 1 --enable-managed-identity --generate-ssh-keys
+-az login
+-az group create --name k8sResourceGroup --location israelcentral
+-az provider register --namespace Microsoft.ContainerService
+-az provider show --namespace Microsoft.ContainerService --query "registrationState" -o table
+-az aks create --resource-group k8sResourceGroup --name myAKSCluster --node-count 1 --enable-managed-identity --generate-ssh-keys
 
 ---
 
 ### 2. **Set up K8S Cluster with RBAC Enabled**
 RBAC was enabled during the cluster creation process, ensuring secure management of resources.
 
-Verification Command:
+Verification Command:<br>
 az aks show --resource-group k8sResourceGroup --name myAKSCluster --query enableRbac --output table
 
 ---
@@ -43,17 +43,17 @@ az aks show --resource-group k8sResourceGroup --name myAKSCluster --query enable
 ### 3. **Two Services: Service-A and Service-B**
 Service-A:
 A Python application that:
-    Fetches Bitcoin prices from the CoinCap API every minute.
-    Calculates and prints the 10-minute average.
-    Dynamically updates an index.html file with price information and trends.
+   - Fetches Bitcoin prices from the CoinCap API every minute.
+   - Calculates and prints the 10-minute average.
+   - Dynamically updates an index.html file with price information and trends.
 Service-B:
-    An NGINX-based service with a custom index.html file displaying "Welcome to Service B."
+   - An NGINX-based service with a custom index.html file displaying "Welcome to Service B."
 
 #### **Commands Used**:
-kubectl apply -f k8s/deployments/a-deployment.yaml
-kubectl apply -f k8s/services/a-service.yaml
-kubectl apply -f k8s/deployments/b-deployment.yaml
-kubectl apply -f k8s/services/b-service.yaml
+- kubectl apply -f k8s/deployments/a-deployment.yaml
+- kubectl apply -f k8s/services/a-service.yaml
+- kubectl apply -f k8s/deployments/b-deployment.yaml
+- kubectl apply -f k8s/services/b-service.yaml
 
 ---
 ### 4. **Ingress Controller**
@@ -74,19 +74,19 @@ A network policy was applied to restrict communication between Service-A and Ser
 kubectl apply -f k8s/deny-com-policy.yaml
 
 #### **Testing**:
-kubectl exec -it <service-a-pod> -- curl http://service-b
+kubectl exec -it <service-a-pod> -- curl http://service-b <br>
     # Expected result: Connection timeout
 
 ---
 ### 6. **Service-A Application**
-Fetches Bitcoin prices in USD every minute and prints them to the console.
-Calculates the average price for the last 10 minutes and logs it.
-Updates a dynamic web page with the price and trends.
+- Fetches Bitcoin prices in USD every minute and prints them to the console.
+- Calculates the average price for the last 10 minutes and logs it.
+- Updates a dynamic web page with the price and trends.
 
 --- 
-#### **Commands Used**:
-docker build -t natashak8sregistry.azurecr.io/bitcoin-fetcher:latest ./app
-docker push natashak8sregistry.azurecr.io/bitcoin-fetcher:latest
+#### **Commands Used**:<br>
+- docker build -t natashak8sregistry.azurecr.io/bitcoin-fetcher:latest ./app
+- docker push natashak8sregistry.azurecr.io/bitcoin-fetcher:latest
 
 ---
 ###  **General Guidelines**
@@ -99,7 +99,7 @@ docker push natashak8sregistry.azurecr.io/bitcoin-fetcher:latest
 
 ---
 ###  **Project Folder Structure**
-
+```
 ├───app
 │   │   bitcoin_fetcher.py
 │   │   Dockerfile
