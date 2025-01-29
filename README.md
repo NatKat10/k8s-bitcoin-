@@ -1,4 +1,4 @@
-# K8s Assignment: Bitcoin Price Fetcher and Service Deployment
+# K8s Bitcoin Price Fetcher and Service Deployment
 
 ## Overview
 
